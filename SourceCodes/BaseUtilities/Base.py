@@ -9,8 +9,8 @@ class Base:
 
     def __init__(self):
         root = Root()
-        if(platform.system().__contains__("Windows")):
-            self.chrome_driver_path = os.path.join(root.ROOT_DIR, "ResourceFiles", "")
+        if platform.system().__contains__("Windows"):
+            self.chrome_driver_path = os.path.join(root.ROOT_DIR, "ResourceFiles", "chromedriverWIN.exe")
             self.ff_driver_path = os.path.join(root.ROOT_DIR, "ResourceFiles", "")
         else:
             self.chrome_driver_path = os.path.join(root.ROOT_DIR, "ResourceFiles", "chromedriverMac")
