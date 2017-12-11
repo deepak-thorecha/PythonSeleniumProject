@@ -3,17 +3,17 @@ from SourceCodes.BaseUtilities.ElementActions import ElementActions
 from SourceCodes.PageLocators.SignInPageLocators import SignInPageLocators
 
 
-class SignInPage (SignInPageLocators):
+class SignInPage (SignInPageLocators, ElementActions):
 
     def __init__(self, driver):
         self.driver = driver
-        self.actions = ElementActions(driver)
+#        self.actions = ElementActions(driver)
 
     def enterUserName(self, uname):
-        self.actions.enterText(SignInPageLocators._userNameField, uname)
+        self.enterText(self._userNameField, uname)
 
     def enterPassword(self, pwd):
-        self.actions.enterText(SignInPageLocators._passwordField, pwd)
+        self.enterText(self._passwordField, pwd)
 
     def clickSignInButton(self):
-        self.actions.clickThis(SignInPageLocators._signInButton)
+        self.clickThis(self._signInButton)
