@@ -1,4 +1,6 @@
 from selenium import webdriver
+from selenium.webdriver.common.action_chains import ActionBuilder, ActionChains
+from selenium.webdriver.chrome.webdriver import WebDriver
 
 
 class ElementActions:
@@ -7,7 +9,8 @@ class ElementActions:
         """
         :WebDriver driver: object
         """
-        self.driver = driver
+        self.driver = WebDriver()
+        self.actions = ActionChains(self.driver)
 
     def __findElement(self, locator=''):
         val = locator.split(":")
@@ -26,9 +29,15 @@ class ElementActions:
 
     def clickThis(self, locator=""):
         self.__findElement(locator).click()
+        return self
 
     def enterText(self, locator="", value="testData"):
         self.__findElement(locator).send_keys(value)
+        return self
 
     def getWebElement(self, locator=""):
         return self.__findElement(locator)
+
+    def hoverElement(self, locator=''):
+        self.actions.move_to_element(locator).perform()
+        return self

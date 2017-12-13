@@ -19,15 +19,17 @@ class HomePageTest (unittest.TestCase):
         home = HomePage(self.driver)
         home.clickSignIn()
         signIn = SignInPage(self.driver)
-        signIn.enterUserName(test_DATA['ProdUserData.userName'])
-        signIn.enterPassword(test_DATA['ProdUserData.password'])
+        signIn.enterUserName(test_DATA.get('ProdUserData.userName'))
+        signIn.enterPassword(test_DATA.get('ProdUserData.password'))
         signIn.clickSignInButton()
+        home.clickSignOut()
 
     def test_Login(self):
         self.AU_DATA = pd.read_excel("/Users/dthorecha/PycharmProjects/PySeleniumProject/ResourceFiles/ProdUserDetails.xls")
         self.AU_DATA = self.AU_DATA[self.AU_DATA.get('TestObject.TestSite') == 'AU']
-        for row in self.AU_DATA.iterrows():
-            self.check_LoginUser(row)
+        self.AU_DATA = self.AU_DATA.get(['ProdUserData.userName', 'ProdUserData.password'])
+        for i in range(0, self.AU_DATA.shape[0], 1):
+            self.check_LoginUser(self.AU_DATA.loc[i])
 
     def tearDown(self):
         self.driver.close()

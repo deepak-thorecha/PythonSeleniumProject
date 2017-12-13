@@ -11,3 +11,6 @@ class HomePage (HomePageLocators, ElementActions):
 
     def clickSignIn(self):
         self.clickThis(self._signInLink)
+
+    def clickSignOut(self):
+        self.hoverElement(self._userNameGreetingLink).clickThis(self._signOutLink)
